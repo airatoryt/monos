@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Large audio files (keep under 10MB)
+assets/audio/*.mp3
+assets/audio/*.wav
+assets/audio/*.ogg
+
+# Keep the ambient track
+!assets/audio/ambient-cosmic.mp3
+!assets/audio/click.mp3
+!assets/audio/hover.mp3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build
+dist/
+build/
