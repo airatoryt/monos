@@ -1,0 +1,429 @@
+/* MONOS - Animations */
+/* Keyframe definitions for all animated elements */
+
+/* ========== MOON ANIMATIONS ========== */
+@keyframes moonPulse {
+    0%, 100% {
+        box-shadow: 0 0 60px var(--neon-red), 0 0 100px var(--crimson);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 80px var(--neon-red), 0 0 140px var(--crimson);
+        transform: scale(1.02);
+    }
+}
+
+@keyframes moonRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes moonGlow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+/* ========== TITLE ANIMATIONS ========== */
+@keyframes titleGlitch {
+    0%, 100% {
+        transform: translate(0);
+        text-shadow: 0 0 20px var(--neon-red), 0 0 40px var(--crimson);
+    }
+    10% {
+        transform: translate(-2px, 2px);
+        text-shadow: 2px 0 var(--neon-red), -2px 0 var(--crimson);
+    }
+    20% {
+        transform: translate(-2px, -2px);
+        text-shadow: 2px 0 var(--neon-red), -2px 0 var(--crimson);
+    }
+    30% {
+        transform: translate(2px, 2px);
+        text-shadow: -2px 0 var(--neon-red), 2px 0 var(--crimson);
+    }
+    40% {
+        transform: translate(2px, -2px);
+        text-shadow: -2px 0 var(--neon-red), 2px 0 var(--crimson);
+    }
+    50% {
+        transform: translate(0);
+        text-shadow: 0 0 20px var(--neon-red), 0 0 40px var(--crimson);
+    }
+}
+
+@keyframes titlePulse {
+    0%, 100% {
+        text-shadow: 0 0 20px var(--neon-red), 0 0 40px var(--crimson), 0 0 80px var(--blood-red);
+    }
+    50% {
+        text-shadow: 0 0 30px var(--neon-red), 0 0 60px var(--crimson), 0 0 120px var(--blood-red);
+    }
+}
+
+/* ========== SCROLL ANIMATIONS ========== */
+@keyframes scytheFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        filter: drop-shadow(0 0 10px var(--neon-red));
+    }
+    50% {
+        transform: translateY(-10px) rotate(5deg);
+        filter: drop-shadow(0 0 20px var(--neon-red));
+    }
+}
+
+@keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* ========== AUDIO BAR ANIMATIONS ========== */
+@keyframes audioBar {
+    0% { height: 4px; }
+    100% { height: 20px; }
+}
+
+/* ========== DISK ANIMATIONS ========== */
+@keyframes diskSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes diskPulse {
+    0%, 100% {
+        box-shadow: 0 0 30px var(--neon-red);
+        opacity: 1;
+    }
+    50% {
+        box-shadow: 0 0 50px var(--neon-red);
+        opacity: 0.8;
+    }
+}
+
+/* ========== POINT ANIMATIONS ========== */
+@keyframes pointPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.7;
+    }
+}
+
+@keyframes crossRotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ========== TYPEWRITER ANIMATION ========== */
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    0%, 100% { border-color: var(--neon-red); }
+    50% { border-color: transparent; }
+}
+
+/* ========== BURST ANIMATIONS ========== */
+@keyframes burstWingSpread {
+    0% {
+        transform: scaleX(0) scaleY(0);
+        opacity: 0;
+    }
+    30% {
+        transform: scaleX(1.2) scaleY(0.8);
+        opacity: 0.8;
+    }
+    60% {
+        transform: scaleX(1) scaleY(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scaleX(2) scaleY(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes burstFlash {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+    20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
+}
+
+@keyframes burstParticleFly {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* ========== THORN ANIMATIONS ========== */
+@keyframes thornGrow {
+    0% {
+        height: 0;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        height: var(--height);
+        opacity: 0.8;
+    }
+}
+
+@keyframes thornPulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 5px var(--neon-red));
+        opacity: 0.6;
+    }
+    50% {
+        filter: drop-shadow(0 0 15px var(--neon-red));
+        opacity: 1;
+    }
+}
+
+/* ========== REVEAL ANIMATIONS ========== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ========== GLOW ANIMATIONS ========== */
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px var(--neon-red);
+    }
+    50% {
+        box-shadow: 0 0 40px var(--neon-red), 0 0 60px var(--crimson);
+    }
+}
+
+@keyframes textGlowPulse {
+    0%, 100% {
+        text-shadow: 0 0 20px var(--neon-red);
+    }
+    50% {
+        text-shadow: 0 0 40px var(--neon-red), 0 0 60px var(--crimson);
+    }
+}
+
+/* ========== FLOAT ANIMATIONS ========== */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    33% {
+        transform: translateY(-10px) rotate(1deg);
+    }
+    66% {
+        transform: translateY(5px) rotate(-1deg);
+    }
+}
+
+@keyframes floatSlow {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* ========== SINGULARITY ANIMATIONS ========== */
+@keyframes singularityPull {
+    0% {
+        transform: translate(var(--start-x), var(--start-y)) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 0) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes eventHorizonGlow {
+    0%, 100% {
+        box-shadow: 
+            0 0 60px var(--neon-red),
+            0 0 100px var(--crimson),
+            inset 0 0 30px rgba(255, 0, 0, 0.5);
+    }
+    50% {
+        box-shadow: 
+            0 0 80px var(--neon-red),
+            0 0 140px var(--crimson),
+            inset 0 0 50px rgba(255, 0, 0, 0.7);
+    }
+}
+
+/* ========== CURSOR ANIMATIONS ========== */
+@keyframes cursorPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+@keyframes cursorCrossSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ========== LOADING ANIMATIONS ========== */
+@keyframes loadingPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+@keyframes loadingProgress {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+/* ========== NAVIGATION ANIMATIONS ========== */
+@keyframes navLinkGlow {
+    0%, 100% {
+        text-shadow: none;
+    }
+    50% {
+        text-shadow: 0 0 10px var(--neon-red);
+    }
+}
+
+/* ========== FORM ANIMATIONS ========== */
+@keyframes formFocusGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 rgba(255, 0, 0, 0);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+    }
+}
+
+/* ========== NEBULA ANIMATIONS ========== */
+@keyframes nebulaShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ========== STAR ANIMATIONS ========== */
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+@keyframes starFloat {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(10px, -10px);
+    }
+    50% {
+        transform: translate(-5px, 5px);
+    }
+    75% {
+        transform: translate(-10px, -5px);
+    }
+}
+
+/* ========== COMBINED ANIMATION CLASSES ========== */
+.animate-fade-in {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-fade-in-scale {
+    animation: fadeInScale 0.6s ease forwards;
+}
+
+.animate-slide-left {
+    animation: slideInLeft 0.8s ease forwards;
+}
+
+.animate-slide-right {
+    animation: slideInRight 0.8s ease forwards;
+}
+
+.animate-glow {
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+    animation: floatSlow 8s ease-in-out infinite;
+}
+
+/* ========== STAGGERED ANIMATION DELAYS ========== */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
+.delay-7 { animation-delay: 0.7s; }
+.delay-8 { animation-delay: 0.8s; }

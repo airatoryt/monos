@@ -1,0 +1,198 @@
+/* MONOS - Custom Cursor Styles */
+/* Cross/X cursor with crimson glow */
+
+/* ========== CURSOR BASE ========== */
+.cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: var(--z-cursor);
+    mix-blend-mode: difference;
+}
+
+.cursor-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--neon-red);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 
+        0 0 10px var(--neon-red),
+        0 0 20px var(--neon-red),
+        0 0 40px var(--crimson);
+    transition: transform 0.1s ease, background 0.2s ease;
+}
+
+.cursor-ring {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--neon-red);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+    opacity: 0.5;
+}
+
+.cursor-cross {
+    position: fixed;
+    font-size: 24px;
+    color: var(--neon-red);
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+    animation: cursorCrossSpin 10s linear infinite;
+    text-shadow: 0 0 10px var(--neon-red);
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+/* ========== CURSOR STATES ========== */
+
+/* Hover state - expanded glow */
+.cursor.hover .cursor-dot {
+    transform: translate(-50%, -50%) scale(1.5);
+    background: var(--pyro-red);
+    box-shadow: 
+        0 0 20px var(--neon-red),
+        0 0 40px var(--neon-red),
+        0 0 60px var(--crimson);
+}
+
+.cursor.hover .cursor-ring {
+    width: 60px;
+    height: 60px;
+    border-color: var(--pyro-red);
+    opacity: 0.8;
+}
+
+.cursor.hover .cursor-cross {
+    font-size: 32px;
+    opacity: 0.8;
+    animation-duration: 2s;
+}
+
+/* Click state - burst effect */
+.cursor.click .cursor-dot {
+    transform: translate(-50%, -50%) scale(0.5);
+    animation: cursorPulse 0.3s ease;
+}
+
+.cursor.click .cursor-ring {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+}
+
+/* Hidden state - when leaving window */
+.cursor.hidden .cursor-dot,
+.cursor.hidden .cursor-ring,
+.cursor.hidden .cursor-cross {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+/* ========== CURSOR TRAIL ========== */
+.cursor-trail {
+    position: fixed;
+    pointer-events: none;
+    z-index: calc(var(--z-cursor) - 1);
+}
+
+.trail-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--neon-red);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    box-shadow: 0 0 6px var(--neon-red);
+    animation: trailFade 0.5s ease forwards;
+}
+
+@keyframes trailFade {
+    0% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+}
+
+/* ========== SPECIAL CURSOR STATES ========== */
+
+/* For clickable elements */
+.cursor[data-state="link"] .cursor-dot {
+    transform: translate(-50%, -50%) scale(0.5);
+    background: transparent;
+    border: 2px solid var(--neon-red);
+}
+
+.cursor[data-state="link"] .cursor-ring {
+    width: 50px;
+    height: 50px;
+    border-width: 2px;
+}
+
+.cursor[data-state="link"] .cursor-cross {
+    opacity: 1;
+    font-size: 20px;
+}
+
+/* For text input */
+.cursor[data-state="text"] .cursor-dot {
+    width: 2px;
+    height: 24px;
+    border-radius: 0;
+    background: var(--neon-red);
+    animation: blink 0.7s step-end infinite;
+}
+
+.cursor[data-state="text"] .cursor-ring {
+    opacity: 0;
+}
+
+.cursor[data-state="text"] .cursor-cross {
+    opacity: 0;
+}
+
+/* For drag */
+.cursor[data-state="drag"] .cursor-dot {
+    transform: translate(-50%, -50%) scale(2);
+}
+
+.cursor[data-state="drag"] .cursor-ring {
+    width: 80px;
+    height: 80px;
+    border-style: dashed;
+    animation: diskSpin 2s linear infinite;
+}
+
+/* ========== MOBILE CURSOR ========== */
+@media (max-width: 768px) {
+    .cursor,
+    .cursor-trail {
+        display: none !important;
+    }
+    
+    body {
+        cursor: auto;
+    }
+    
+    a, button, input, textarea, [role="button"] {
+        cursor: pointer;
+    }
+}
+
+/* ========== PERFORMANCE ========== */
+@media (prefers-reduced-motion: reduce) {
+    .cursor-cross {
+        animation: none;
+    }
+    
+    .trail-particle {
+        animation: none;
+        opacity: 0.5;
+    }
+}
