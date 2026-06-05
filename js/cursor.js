@@ -47,6 +47,12 @@
             this.trailParticles = [];
             this.lastTrailTime = 0;
             
+            // Sound effects
+            this.clickSound = new Audio('assets/audio/click.mp3');
+            this.hoverSound = new Audio('assets/audio/hover.mp3');
+            this.clickSound.volume = 0.4;
+            this.hoverSound.volume = 0.2;
+            
             this.init();
         }
         
@@ -69,6 +75,7 @@
             document.addEventListener('mousedown', () => {
                 this.cursor.classList.add('click');
                 this.createClickBurst();
+                this.playClickSound();
             });
             
             // Mouse up
@@ -82,6 +89,7 @@
                 el.addEventListener('mouseenter', () => {
                     this.cursor.classList.add('hover');
                     this.cursor.setAttribute('data-state', 'link');
+                    this.playHoverSound();
                 });
                 
                 el.addEventListener('mouseleave', () => {
@@ -239,6 +247,26 @@
         reset() {
             this.cursor.removeAttribute('data-state');
             this.cursor.classList.remove('hover', 'click');
+        }
+        
+        // Play click sound effect
+        playClickSound() {
+            try {
+                this.clickSound.currentTime = 0;
+                this.clickSound.play().catch(e => console.log('Click sound prevented:', e));
+            } catch (e) {
+                console.log('Click sound error:', e);
+            }
+        }
+        
+        // Play hover sound effect
+        playHoverSound() {
+            try {
+                this.hoverSound.currentTime = 0;
+                this.hoverSound.play().catch(e => console.log('Hover sound prevented:', e));
+            } catch (e) {
+                console.log('Hover sound error:', e);
+            }
         }
     }
     

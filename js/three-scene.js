@@ -323,19 +323,24 @@
                 const angle = sphere.userData.orbitAngle;
                 const radius = sphere.userData.orbitRadius;
                 
-                // Collapse toward center based on scroll
+                // Collapse toward center based on scroll (reversible)
                 const collapseFactor = this.scrollProgress;
+                const originalPos = sphere.userData.originalPosition;
+                
+                // Calculate target positions - interpolate between original and collapsed
                 const targetX = Math.cos(angle) * radius * (1 - collapseFactor);
-                const targetY = sphere.position.y * (1 - collapseFactor);
-                const targetZ = sphere.position.z + collapseFactor * 200;
+                const targetY = originalPos.y * (1 - collapseFactor);
+                const targetZ = originalPos.z + collapseFactor * 250;
                 
-                sphere.position.x += (targetX - sphere.position.x) * 0.02;
-                sphere.position.y += (targetY - sphere.position.y) * 0.02;
-                sphere.position.z += (targetZ - sphere.position.z) * 0.02;
+                // Smooth interpolation that works in both directions
+                const lerpFactor = 0.05;
+                sphere.position.x += (targetX - sphere.position.x) * lerpFactor;
+                sphere.position.y += (targetY - sphere.position.y) * lerpFactor;
+                sphere.position.z += (targetZ - sphere.position.z) * lerpFactor;
                 
-                // Scale down during collapse
-                const scale = 1 - collapseFactor * 0.5;
-                sphere.scale.set(scale, scale, scale);
+                // Scale - expand when scrolling back up
+                const targetScale = 1 - collapseFactor * 0.5;
+                sphere.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.05);
             });
         }
         
