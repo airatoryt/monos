@@ -1,0 +1,33 @@
+/* MONOS - Navigation Scroll Progress */
+/* Updates the red progress bar under the nav as you scroll */
+
+(function() {
+    'use strict';
+
+    function initNavProgress() {
+        const bar = document.getElementById('navProgress');
+        if (!bar) return;
+
+        let ticking = false;
+        function update() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            bar.style.width = progress + '%';
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(update);
+                ticking = true;
+            }
+        }, { passive: true });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initNavProgress);
+    } else {
+        initNavProgress();
+    }
+})();

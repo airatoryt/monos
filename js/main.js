@@ -170,9 +170,49 @@
         const audio = document.getElementById('ambientAudio');
         if (!audio || !elements.audioBtn) return;
 
-        audio.volume = 0.4;
+        audio.volume = 0.35;
 
-        elements.audioBtn.addEventListener('click', () => {
+        // Try immediate autoplay (may be blocked until first user interaction)
+        const tryAutoplay = () => {
+            audio.play().then(() => {
+                elements.audioBtn.classList.remove('muted');
+                state.audioPlaying = true;
+            }).catch(() => {
+                // Autoplay blocked — wait for first user interaction
+                state.audioPlaying = false;
+                elements.audioBtn.classList.add('muted');
+                showAudioPrompt();
+            });
+        };
+
+        // Show a small prompt that disappears once user clicks anywhere
+        const showAudioPrompt = () => {
+            const prompt = document.getElementById('audioPrompt');
+            if (!prompt) return;
+            prompt.classList.add('visible');
+            const startOnClick = () => {
+                audio.play().then(() => {
+                    elements.audioBtn.classList.remove('muted');
+                    state.audioPlaying = true;
+                    prompt.classList.remove('visible');
+                }).catch(() => {});
+                document.removeEventListener('click', startOnClick);
+                document.removeEventListener('keydown', startOnClick);
+            };
+            document.addEventListener('click', startOnClick, { once: true });
+            document.addEventListener('keydown', startOnClick, { once: true });
+        };
+
+        // Attempt after page loads
+        if (document.readyState === 'complete') {
+            tryAutoplay();
+        } else {
+            window.addEventListener('load', tryAutoplay);
+        }
+
+        // Manual toggle button
+        elements.audioBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             if (state.audioPlaying) {
                 audio.pause();
                 elements.audioBtn.classList.add('muted');
@@ -181,10 +221,7 @@
                 audio.play().then(() => {
                     elements.audioBtn.classList.remove('muted');
                     state.audioPlaying = true;
-                }).catch(() => {
-                    elements.audioBtn.classList.add('muted');
-                    state.audioPlaying = false;
-                });
+                }).catch(() => {});
             }
         });
     }

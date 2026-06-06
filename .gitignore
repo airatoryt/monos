@@ -1,13 +1,12 @@
 # Dependencies
 node_modules/
 
-# Large audio files (keep under 10MB)
-assets/audio/*.mp3
+# Large audio files (keep under 2MB)
 assets/audio/*.wav
 assets/audio/*.ogg
 
-# Keep the ambient track
-!assets/audio/ambient-cosmic.mp3
+# Track small SFX (under 20KB)
+!assets/audio/*.mp3
 !assets/audio/click.mp3
 !assets/audio/hover.mp3
 

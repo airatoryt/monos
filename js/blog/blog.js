@@ -63,16 +63,20 @@
 
     function renderPosts() {
         const grid = document.getElementById('blogGrid');
-        if (!grid) return;
+        if (!grid) {
+            console.error('blogGrid element not found');
+            return;
+        }
 
         const sortedPosts = [...POSTS].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        grid.innerHTML = sortedPosts.map(post => {
+        grid.innerHTML = sortedPosts.map((post, i) => {
             const { formatDate } = window.monosMarkdown;
             return `
-                <a href="./post.html?slug=${post.slug}" class="blog-card" data-aos="fade-up">
+                <a href="./post.html?slug=${post.slug}" class="blog-card" style="--card-index:${i}">
                     <div class="blog-card-image">
                         <img src="../assets/images/sigil-static.svg" class="blog-card-sigil" alt="">
+                        <div class="blog-card-glow"></div>
                     </div>
                     <div class="blog-card-content">
                         <div class="blog-card-meta">
@@ -80,10 +84,12 @@
                             <span class="blog-card-tag">${post.tag}</span>
                         </div>
                         <h2 class="blog-card-title">${post.title}</h2>
+                        <p class="blog-card-subtitle">${post.subtitle}</p>
+                        <div class="blog-card-divider"></div>
                         <p class="blog-card-excerpt">${post.excerpt}</p>
                         <div class="blog-card-footer">
-                            <span>${post.readTime} min read</span>
-                            <span class="blog-card-read">READ →</span>
+                            <span class="blog-card-time">${post.readTime} MIN READ</span>
+                            <span class="blog-card-read">READ <span class="arrow">→</span></span>
                         </div>
                     </div>
                 </a>

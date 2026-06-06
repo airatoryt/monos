@@ -8,7 +8,7 @@
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✖</text></svg>">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Major+Mono+Display&family=Orbitron:wght@400;500;600;700;800;900&family=Russo+One&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/tokens.css">
     <link rel="stylesheet" href="../css/reset.css">
@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="../css/animations.css">
     <link rel="stylesheet" href="../css/cursor.css">
     <link rel="stylesheet" href="../css/blog.css">
-    <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
     <!-- Custom Cursor -->
@@ -41,6 +40,7 @@
 
     <!-- Navigation -->
     <nav class="nav" id="nav">
+        <div class="nav-progress" id="navProgress"></div>
         <a href="../index.html" class="nav-logo">
             <img src="../assets/images/sigil-static.svg" alt="MONOS Sigil">
             <span class="nav-logo-text">MONOS</span>
@@ -86,6 +86,37 @@
         <div class="burst-particles" id="burstParticles"></div>
     </div>
 
+    <!-- Audio Controls -->
+    <div class="audio-control" id="audioControl">
+        <button class="audio-btn" id="audioBtn" aria-label="Toggle music" title="Mute / Unmute">
+            <svg class="audio-icon on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+            <svg class="audio-icon off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                <line x1="23" y1="9" x2="17" y2="15"/>
+                <line x1="17" y1="9" x2="23" y2="15"/>
+            </svg>
+        </button>
+        <div class="audio-bars">
+            <span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!-- Ambient Music -->
+    <audio id="ambientAudio" loop preload="auto">
+        <source src="../assets/audio/ambient-cosmic.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Audio prompt (autoplay fallback) -->
+    <div class="audio-prompt" id="audioPrompt" aria-hidden="true">
+        <div class="audio-prompt-inner">
+            <span class="audio-prompt-pulse"></span>
+            <span class="audio-prompt-text">CLICK TO BEGIN THE TRANSMISSION</span>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
@@ -97,5 +128,7 @@
     <script src="../js/ui/burst.js" defer></script>
     <script src="../js/blog/renderer.js" defer></script>
     <script src="../js/blog/blog.js" defer></script>
+    <script src="../js/ui/nav-progress.js" defer></script>
+    <script src="../js/blog-audio.js" defer></script>
 </body>
 </html>
