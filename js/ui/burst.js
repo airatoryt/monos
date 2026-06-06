@@ -59,6 +59,13 @@
         state.burstActive = true;
         elements.burstOverlay.classList.add('active');
 
+        // Trigger chromatic aberration
+        const ca = document.getElementById('chromaticOverlay');
+        if (ca) {
+            ca.classList.add('active');
+            setTimeout(() => ca.classList.remove('active'), 800);
+        }
+
         // Play sounds in sequence
         playRumbleSound();
         setTimeout(playWhooshSound, 100);

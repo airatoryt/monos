@@ -98,7 +98,7 @@
 
                 <div class="hero-content">
                     <img src="assets/images/sigil-static.svg" class="hero-sigil" alt="MONOS Sigil">
-                    <h1 class="title" data-text="MONOS">
+                    <h1 class="title" data-text="MONOS" data-scramble="MONOS">
                         M<span class="title-accent">O</span>N<span class="title-accent">O</span>S
                     </h1>
                     <p class="subtitle">Where all universes collapse into a single point</p>
@@ -223,17 +223,29 @@
                     </form>
                 </div>
 
-                <!-- Footer -->
+                <!-- Footer (Particle Morph — igloo.inc inspired) -->
                 <footer class="footer">
                     <a href="#home">
                         <img src="assets/images/sigil-static.svg" class="footer-sigil" alt="MONOS">
                     </a>
                     <p class="footer-text">ALL PATHS CONVERGE</p>
-                    <div class="footer-links">
-                        <a href="blog/index.html" class="footer-link">ARCHIVES</a>
-                        <a href="#" class="footer-link">X</a>
-                        <a href="#" class="footer-link">IG</a>
-                        <a href="#" class="footer-link">DC</a>
+
+                    <div class="particle-morph" id="particleMorph">
+                        <canvas class="morph-canvas" id="morphCanvas"></canvas>
+                        <div class="morph-links">
+                            <a href="blog/index.html" class="morph-link" data-shape="archives">
+                                <span class="morph-label">ARCHIVES</span>
+                            </a>
+                            <a href="#" class="morph-link" data-shape="x">
+                                <span class="morph-label">X</span>
+                            </a>
+                            <a href="#" class="morph-link" data-shape="github">
+                                <span class="morph-label">GITHUB</span>
+                            </a>
+                            <a href="#" class="morph-link" data-shape="discord">
+                                <span class="morph-label">DISCORD</span>
+                            </a>
+                        </div>
                     </div>
                 </footer>
             </div>
@@ -252,6 +264,12 @@
         <div class="burst-particles" id="burstParticles"></div>
     </div>
 
+    <!-- Chromatic Aberration Overlay (igloo.inc inspired) -->
+    <div class="chromatic-aberration" id="chromaticOverlay" aria-hidden="true">
+        <div class="ca-layer ca-cyan"></div>
+        <div class="ca-layer ca-red"></div>
+    </div>
+
     <!-- Ambient Music -->
     <audio id="ambientAudio" loop preload="none">
         <source src="assets/audio/ambient-cosmic.mp3" type="audio/mpeg">
@@ -267,6 +285,9 @@
     <script src="js/ui/cursor.js" defer></script>
     <script src="js/ui/loader.js" defer></script>
     <script src="js/ui/burst.js" defer></script>
+    <script src="js/effects/depth-parallax.js" defer></script>
+    <script src="js/effects/particle-morph.js" defer></script>
+    <script src="js/effects/text-fx.js" defer></script>
     <script src="js/main.js" defer></script>
 </body>
 </html>

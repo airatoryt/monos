@@ -349,10 +349,18 @@
             this.camera.position.z += (targetZ - this.camera.position.z) * 0.05;
 
             const time = this.clock.getElapsedTime();
-            this.camera.position.x = Math.sin(time * 0.1) * 10;
-            this.camera.position.y = Math.cos(time * 0.15) * 5;
 
-            this.camera.lookAt(0, 0, -100);
+            // Mouse-driven depth parallax (igloo.inc signature)
+            // Map normalized mouse (-1..1) to camera offset, lerp smoothly
+            const targetX = this.mouseX * 35 + Math.sin(time * 0.1) * 6;
+            const targetY = this.mouseY * 25 + Math.cos(time * 0.15) * 4;
+            const lookOffsetX = this.mouseX * -15;
+            const lookOffsetY = this.mouseY * -10;
+
+            this.camera.position.x += (targetX - this.camera.position.x) * 0.04;
+            this.camera.position.y += (targetY - this.camera.position.y) * 0.04;
+
+            this.camera.lookAt(lookOffsetX, lookOffsetY, -100);
         }
 
         animate() {
@@ -363,6 +371,7 @@
             this.particleSystems.forEach(system => system.update(time));
             this.updateUniverseSpheres(time);
             this.updateBlackHole(time);
+            this.updateMouse();
             this.updateCamera();
 
             this.renderer.render(this.scene, this.camera);
@@ -380,13 +389,28 @@
         }
 
         initEventListeners() {
+            this.mouseX = 0;
+            this.mouseY = 0;
+            this.targetMouseX = 0;
+            this.targetMouseY = 0;
+
             window.addEventListener('resize', () => this.resize());
+
+            window.addEventListener('mousemove', (e) => {
+                this.targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                this.targetMouseY = -((e.clientY / window.innerHeight) * 2 - 1);
+            });
 
             window.addEventListener('scroll', () => {
                 const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
                 const progress = window.scrollY / scrollHeight;
                 this.updateScrollProgress(progress);
             });
+        }
+
+        updateMouse() {
+            this.mouseX += (this.targetMouseX - this.mouseX) * 0.06;
+            this.mouseY += (this.targetMouseY - this.mouseY) * 0.06;
         }
 
         updateScrollProgress(progress) {

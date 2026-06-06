@@ -10,6 +10,72 @@
     }
 }
 
+/* ========== GLITCH / SCRAMBLE REVEAL (igloo.inc inspired) ========== */
+.title.glitching {
+    position: relative;
+    animation: titleGlitch 0.3s steps(2) infinite;
+}
+
+.title.glitching::before,
+.title.glitching::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--void-0);
+    overflow: hidden;
+}
+
+.title.glitching::before {
+    color: var(--crimson-bright);
+    animation: glitchOffset1 0.4s steps(3) infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+.title.glitching::after {
+    color: #00ffff;
+    animation: glitchOffset2 0.4s steps(3) infinite;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+
+.title.revealed {
+    animation: titleSettle 0.6s var(--ease-cosmic) forwards;
+}
+
+@keyframes titleGlitch {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes glitchOffset1 {
+    0% { transform: translate(0); }
+    20% { transform: translate(-3px, 1px); }
+    40% { transform: translate(3px, -1px); }
+    60% { transform: translate(-2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes glitchOffset2 {
+    0% { transform: translate(0); }
+    20% { transform: translate(3px, -1px); }
+    40% { transform: translate(-3px, 1px); }
+    60% { transform: translate(2px, -2px); }
+    80% { transform: translate(-2px, 2px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes titleSettle {
+    0% { transform: scale(1.1); filter: blur(2px); }
+    100% { transform: scale(1); filter: blur(0); }
+}
+
 /* ========== SIGIL ANIMATIONS ========== */
 @keyframes sigilRotate {
     from { transform: rotate(0deg); }

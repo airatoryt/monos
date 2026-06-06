@@ -328,6 +328,9 @@ body {
     overflow: hidden;
     opacity: 0.5;
     animation: moonBreathe 8s var(--ease-cosmic) infinite;
+    --parallax-x: 0;
+    --parallax-y: 0;
+    will-change: transform;
 }
 
 .moon-surface {
@@ -394,6 +397,14 @@ body {
     justify-content: center;
     min-height: 60vh;
     gap: var(--space-5);
+    --parallax-x: 0;
+    --parallax-y: 0;
+    transform: translate3d(
+        calc(var(--parallax-x) * 1px),
+        calc(var(--parallax-y) * 1px),
+        0
+    );
+    will-change: transform;
 }
 
 .hero-sigil {
@@ -402,6 +413,14 @@ body {
     margin-bottom: var(--space-6);
     filter: drop-shadow(0 0 30px var(--crimson-bright)) drop-shadow(0 0 60px var(--crimson-rich));
     animation: sigilRotate 20s linear infinite;
+    --parallax-x: 0;
+    --parallax-y: 0;
+    transform: translate3d(
+        calc(var(--parallax-x) * 2px),
+        calc(var(--parallax-y) * 2px),
+        0
+    );
+    will-change: transform;
 }
 
 .title {
@@ -1005,6 +1024,58 @@ body {
     background: rgba(255, 0, 0, 0.05);
 }
 
+/* ========== PARTICLE MORPH FOOTER (igloo.inc inspired) ========== */
+.particle-morph {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: var(--space-5) auto 0;
+}
+
+.morph-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.morph-links {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: var(--space-3);
+    pointer-events: none;
+}
+
+.morph-link {
+    pointer-events: auto;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--void-4);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    transition: all 0.3s var(--ease-cosmic);
+    background: rgba(20, 21, 30, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.morph-link:hover {
+    color: var(--crimson-bright);
+    border-color: var(--crimson-bright);
+    text-shadow: 0 0 10px var(--crimson-bright);
+    background: rgba(255, 0, 0, 0.05);
+}
+
 /* ========== BURST OVERLAY ========== */
 .burst-overlay {
     position: fixed;
@@ -1107,4 +1178,50 @@ body {
     border-radius: 50%;
     box-shadow: 0 0 30px var(--crimson-bright);
     animation: shockwaveExpand 1s var(--ease-burst) forwards;
+}
+
+/* ========== CHROMATIC ABERRATION (igloo.inc inspired) ========== */
+.chromatic-aberration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: calc(var(--z-burst) - 1);
+    mix-blend-mode: screen;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-cosmic);
+}
+
+.chromatic-aberration.active {
+    opacity: 1;
+}
+
+.ca-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    transition: transform 0.6s var(--ease-cosmic);
+}
+
+.chromatic-aberration.active .ca-cyan {
+    transform: translate(-4px, 2px);
+    background: radial-gradient(
+        ellipse at 30% 50%,
+        rgba(0, 255, 255, 0.18) 0%,
+        transparent 40%
+    );
+}
+
+.chromatic-aberration.active .ca-red {
+    transform: translate(4px, -2px);
+    background: radial-gradient(
+        ellipse at 70% 50%,
+        rgba(255, 0, 60, 0.22) 0%,
+        transparent 40%
+    );
 }
