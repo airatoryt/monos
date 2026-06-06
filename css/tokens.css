@@ -1,0 +1,139 @@
+/* MONOS - Design Tokens */
+/* Centralized design system variables */
+
+:root {
+    /* ========== VOID (Black Spectrum) ========== */
+    --void-0: #000000;
+    --void-1: #050507;
+    --void-2: #0a0a12;
+    --void-3: #14151E;
+    --void-4: #1f1f2e;
+
+    /* ========== CRIMSON (Red Spectrum) ========== */
+    --crimson-deep: #2D0A11;
+    --crimson-base: #511720;
+    --crimson-rich: #8B0000;
+    --crimson-mid: #C81E1E;
+    --crimson-bright: #FF0000;
+    --crimson-glow: #FF3B3B;
+    --crimson-pale: #FF6B6B;
+
+    /* ========== ACCENT (Sparse Use) ========== */
+    --moonlight: #DDD3E3;
+    --bone: #EEF0F3;
+    --ember: #FFB347;
+
+    /* ========== SEMANTIC COLORS ========== */
+    --color-bg: var(--void-3);
+    --color-bg-deep: var(--void-2);
+    --color-bg-elevated: var(--void-4);
+    --color-text: var(--bone);
+    --color-text-muted: var(--moonlight);
+    --color-accent: var(--crimson-bright);
+    --color-accent-deep: var(--crimson-base);
+    --color-glow: var(--crimson-bright);
+    --color-border: var(--crimson-base);
+    --color-border-subtle: var(--void-4);
+
+    /* ========== GRADIENTS ========== */
+    --grad-crimson: linear-gradient(135deg, var(--crimson-base) 0%, var(--crimson-rich) 50%, var(--crimson-bright) 100%);
+    --grad-dark: linear-gradient(180deg, var(--void-3) 0%, var(--void-1) 100%);
+    --grad-sigil: conic-gradient(from 0deg, var(--crimson-bright), var(--crimson-base), var(--crimson-bright));
+    --grad-event: radial-gradient(ellipse, var(--crimson-bright) 0%, var(--crimson-base) 40%, var(--void-0) 80%);
+    --grad-burst: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, var(--crimson-glow) 20%, var(--crimson-bright) 50%, transparent 80%);
+
+    /* ========== TYPOGRAPHY ========== */
+    --font-display: 'Cinzel', 'Times New Roman', serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-accent: 'Cormorant Garamond', 'Times New Roman', serif;
+
+    /* Golden Ratio Type Scale (1.618) */
+    --text-xs: 0.494rem;     /* ~8px */
+    --text-sm: 0.618rem;     /* ~10px */
+    --text-base: 0.799rem;   /* ~13px */
+    --text-md: 1rem;         /* 16px */
+    --text-lg: 1.293rem;     /* ~21px */
+    --text-xl: 1.618rem;     /* ~26px */
+    --text-2xl: 2.091rem;    /* ~33px */
+    --text-3xl: 3.382rem;    /* ~54px */
+    --text-4xl: 5.472rem;    /* ~88px */
+    --text-5xl: 8.854rem;    /* ~142px */
+
+    /* Line Heights */
+    --leading-none: 1;
+    --leading-tight: 1.2;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.8;
+    --leading-loose: 2.2;
+
+    /* Letter Spacing */
+    --tracking-tighter: -0.05em;
+    --tracking-tight: -0.02em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.05em;
+    --tracking-wider: 0.1em;
+    --tracking-widest: 0.3em;
+
+    /* ========== SPACING (Fibonacci-ish) ========== */
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --space-7: 3rem;
+    --space-8: 4rem;
+    --space-9: 6rem;
+    --space-10: 8rem;
+    --space-11: 12rem;
+
+    /* ========== TIMING (Custom Easings) ========== */
+    --ease-cosmic: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-impact: cubic-bezier(0.87, 0, 0.13, 1);
+    --ease-organic: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-burst: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-collapse: cubic-bezier(0.7, 0, 0.84, 0);
+
+    /* Duration */
+    --duration-instant: 0.1s;
+    --duration-fast: 0.2s;
+    --duration-normal: 0.3s;
+    --duration-slow: 0.6s;
+    --duration-slower: 1s;
+    --duration-slowest: 2s;
+
+    /* ========== Z-INDEX LAYERS ========== */
+    --z-background: -1;
+    --z-base: 1;
+    --z-content: 10;
+    --z-overlay: 50;
+    --z-nav: 100;
+    --z-cursor: 1000;
+    --z-burst: 2000;
+    --z-loading: 9999;
+
+    /* ========== SHADOWS & GLOWS ========== */
+    --shadow-glow-sm: 0 0 10px var(--crimson-bright);
+    --shadow-glow-md: 0 0 20px var(--crimson-bright), 0 0 40px var(--crimson-base);
+    --shadow-glow-lg: 0 0 30px var(--crimson-bright), 0 0 60px var(--crimson-base), 0 0 90px var(--crimson-rich);
+    --shadow-text-glow: 0 0 10px var(--crimson-bright), 0 0 20px var(--crimson-base);
+    --shadow-text-glow-lg: 0 0 20px var(--crimson-bright), 0 0 40px var(--crimson-base), 0 0 60px var(--crimson-rich);
+
+    /* ========== BORDERS ========== */
+    --border-thin: 1px solid var(--color-border-subtle);
+    --border-base: 1px solid var(--color-border);
+    --border-glow: 1px solid var(--crimson-bright);
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 8px;
+    --radius-full: 9999px;
+
+    /* ========== SIZES ========== */
+    --size-nav-height: 80px;
+    --size-cursor: 40px;
+    --size-sigil-sm: 40px;
+    --size-sigil-md: 80px;
+    --size-sigil-lg: 160px;
+}

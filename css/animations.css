@@ -1,15 +1,60 @@
 /* MONOS - Animations */
 /* Keyframe definitions for all animated elements */
 
+/* ========== SIGIL ANIMATIONS ========== */
+@keyframes sigilRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes sigilPulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 30px var(--crimson-bright)) drop-shadow(0 0 60px var(--crimson-rich));
+    }
+    50% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 50px var(--crimson-bright)) drop-shadow(0 0 100px var(--crimson-rich));
+    }
+}
+
+@keyframes corePulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow:
+            0 0 30px var(--crimson-bright),
+            0 0 60px var(--crimson-bright),
+            0 0 100px var(--crimson-base);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        box-shadow:
+            0 0 50px var(--crimson-bright),
+            0 0 100px var(--crimson-bright),
+            0 0 150px var(--crimson-rich);
+    }
+}
+
 /* ========== MOON ANIMATIONS ========== */
 @keyframes moonPulse {
     0%, 100% {
-        box-shadow: 0 0 60px var(--neon-red), 0 0 100px var(--crimson);
         transform: scale(1);
+        filter: drop-shadow(0 0 60px var(--crimson-bright));
     }
     50% {
-        box-shadow: 0 0 80px var(--neon-red), 0 0 140px var(--crimson);
-        transform: scale(1.02);
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 90px var(--crimson-bright));
+    }
+}
+
+@keyframes moonBreathe {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.02);
     }
 }
 
@@ -27,108 +72,56 @@
 @keyframes titleGlitch {
     0%, 100% {
         transform: translate(0);
-        text-shadow: 0 0 20px var(--neon-red), 0 0 40px var(--crimson);
+        text-shadow: 0 0 20px var(--crimson-bright), 0 0 40px var(--crimson-base);
     }
     10% {
         transform: translate(-2px, 2px);
-        text-shadow: 2px 0 var(--neon-red), -2px 0 var(--crimson);
+        text-shadow: 2px 0 var(--crimson-bright), -2px 0 var(--crimson-base);
     }
     20% {
         transform: translate(-2px, -2px);
-        text-shadow: 2px 0 var(--neon-red), -2px 0 var(--crimson);
+        text-shadow: 2px 0 var(--crimson-bright), -2px 0 var(--crimson-base);
     }
     30% {
         transform: translate(2px, 2px);
-        text-shadow: -2px 0 var(--neon-red), 2px 0 var(--crimson);
+        text-shadow: -2px 0 var(--crimson-bright), 2px 0 var(--crimson-base);
     }
     40% {
         transform: translate(2px, -2px);
-        text-shadow: -2px 0 var(--neon-red), 2px 0 var(--crimson);
+        text-shadow: -2px 0 var(--crimson-bright), 2px 0 var(--crimson-base);
     }
     50% {
         transform: translate(0);
-        text-shadow: 0 0 20px var(--neon-red), 0 0 40px var(--crimson);
+        text-shadow: 0 0 20px var(--crimson-bright), 0 0 40px var(--crimson-base);
     }
 }
 
 @keyframes titlePulse {
     0%, 100% {
-        text-shadow: 0 0 20px var(--neon-red), 0 0 40px var(--crimson), 0 0 80px var(--blood-red);
+        text-shadow: 0 0 20px var(--crimson-bright), 0 0 40px var(--crimson-base), 0 0 80px var(--crimson-rich);
     }
     50% {
-        text-shadow: 0 0 30px var(--neon-red), 0 0 60px var(--crimson), 0 0 120px var(--blood-red);
+        text-shadow: 0 0 30px var(--crimson-bright), 0 0 60px var(--crimson-base), 0 0 120px var(--crimson-rich);
     }
 }
 
-/* ========== SCROLL ANIMATIONS ========== */
-@keyframes scytheFloat {
+@keyframes accentPulse {
     0%, 100% {
-        transform: translateY(0) rotate(0deg);
-        filter: drop-shadow(0 0 10px var(--neon-red));
+        text-shadow: 0 0 30px var(--crimson-bright), 0 0 60px var(--crimson-bright), 0 0 90px var(--crimson-rich);
     }
     50% {
-        transform: translateY(-10px) rotate(5deg);
-        filter: drop-shadow(0 0 20px var(--neon-red));
+        text-shadow: 0 0 50px var(--crimson-bright), 0 0 100px var(--crimson-glow), 0 0 150px var(--crimson-rich);
     }
-}
-
-@keyframes scrollBounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(10px); }
-}
-
-/* ========== AUDIO BAR ANIMATIONS ========== */
-@keyframes audioBar {
-    0% { height: 4px; }
-    100% { height: 20px; }
-}
-
-/* ========== DISK ANIMATIONS ========== */
-@keyframes diskSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-@keyframes diskPulse {
-    0%, 100% {
-        box-shadow: 0 0 30px var(--neon-red);
-        opacity: 1;
-    }
-    50% {
-        box-shadow: 0 0 50px var(--neon-red);
-        opacity: 0.8;
-    }
-}
-
-/* ========== POINT ANIMATIONS ========== */
-@keyframes pointPulse {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.4;
-    }
-    50% {
-        transform: translate(-50%, -50%) scale(1.2);
-        opacity: 0.7;
-    }
-}
-
-@keyframes crossRotate {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* ========== TYPEWRITER ANIMATION ========== */
-@keyframes typewriter {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink {
-    0%, 100% { border-color: var(--neon-red); }
-    50% { border-color: transparent; }
 }
 
 /* ========== BURST ANIMATIONS ========== */
+@keyframes burstSigilExpand {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    30% { transform: scale(1.5) rotate(90deg); opacity: 1; }
+    60% { transform: scale(2) rotate(180deg); opacity: 0.8; }
+    100% { transform: scale(3) rotate(360deg); opacity: 0; }
+}
+
 @keyframes burstWingSpread {
     0% {
         transform: scaleX(0) scaleY(0);
@@ -154,15 +147,101 @@
     100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
 }
 
+@keyframes shockwaveExpand {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+        border-width: 3px;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(20);
+        opacity: 0;
+        border-width: 1px;
+    }
+}
+
 @keyframes burstParticleFly {
     0% {
-        transform: translate(0, 0) scale(1);
+        transform: translate(-50%, -50%) scale(1);
         opacity: 1;
     }
     100% {
-        transform: translate(var(--tx), var(--ty)) scale(0);
+        transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0);
         opacity: 0;
     }
+}
+
+/* ========== SCROLL ANIMATIONS ========== */
+@keyframes scytheFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        filter: drop-shadow(0 0 10px var(--crimson-bright));
+    }
+    50% {
+        transform: translateY(-10px) rotate(5deg);
+        filter: drop-shadow(0 0 20px var(--crimson-bright));
+    }
+}
+
+@keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* ========== AUDIO BAR ANIMATIONS ========== */
+@keyframes audioBar {
+    0% { height: 4px; }
+    100% { height: 20px; }
+}
+
+/* ========== DISK ANIMATIONS ========== */
+@keyframes diskSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes horizonPulse {
+    0%, 100% {
+        box-shadow:
+            0 0 80px var(--crimson-bright),
+            0 0 150px var(--crimson-base),
+            inset 0 0 40px rgba(255, 0, 0, 0.6);
+    }
+    50% {
+        box-shadow:
+            0 0 120px var(--crimson-bright),
+            0 0 200px var(--crimson-base),
+            inset 0 0 60px rgba(255, 0, 0, 0.8);
+    }
+}
+
+/* ========== POINT ANIMATIONS ========== */
+@keyframes pointPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.7;
+    }
+}
+
+/* ========== CURSOR ANIMATIONS ========== */
+@keyframes cursorPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+@keyframes cursorCrossSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* ========== THORN ANIMATIONS ========== */
@@ -182,11 +261,11 @@
 
 @keyframes thornPulse {
     0%, 100% {
-        filter: drop-shadow(0 0 5px var(--neon-red));
+        filter: drop-shadow(0 0 5px var(--crimson-bright));
         opacity: 0.6;
     }
     50% {
-        filter: drop-shadow(0 0 15px var(--neon-red));
+        filter: drop-shadow(0 0 15px var(--crimson-bright));
         opacity: 1;
     }
 }
@@ -236,23 +315,22 @@
     }
 }
 
-/* ========== GLOW ANIMATIONS ========== */
-@keyframes glowPulse {
-    0%, 100% {
-        box-shadow: 0 0 20px var(--neon-red);
+/* ========== SINGULARITY ANIMATIONS ========== */
+@keyframes singularityPull {
+    0% {
+        transform: translate(var(--start-x), var(--start-y)) scale(1);
+        opacity: 1;
     }
-    50% {
-        box-shadow: 0 0 40px var(--neon-red), 0 0 60px var(--crimson);
+    100% {
+        transform: translate(0, 0) scale(0);
+        opacity: 0;
     }
 }
 
-@keyframes textGlowPulse {
-    0%, 100% {
-        text-shadow: 0 0 20px var(--neon-red);
-    }
-    50% {
-        text-shadow: 0 0 40px var(--neon-red), 0 0 60px var(--crimson);
-    }
+/* ========== LOADING ANIMATIONS ========== */
+@keyframes loadingProgress {
+    from { width: 0%; }
+    to { width: 100%; }
 }
 
 /* ========== FLOAT ANIMATIONS ========== */
@@ -277,84 +355,22 @@
     }
 }
 
-/* ========== SINGULARITY ANIMATIONS ========== */
-@keyframes singularityPull {
-    0% {
-        transform: translate(var(--start-x), var(--start-y)) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(0, 0) scale(0);
-        opacity: 0;
-    }
-}
-
-@keyframes eventHorizonGlow {
+/* ========== GLOW ANIMATIONS ========== */
+@keyframes glowPulse {
     0%, 100% {
-        box-shadow: 
-            0 0 60px var(--neon-red),
-            0 0 100px var(--crimson),
-            inset 0 0 30px rgba(255, 0, 0, 0.5);
+        box-shadow: 0 0 20px var(--crimson-bright);
     }
     50% {
-        box-shadow: 
-            0 0 80px var(--neon-red),
-            0 0 140px var(--crimson),
-            inset 0 0 50px rgba(255, 0, 0, 0.7);
+        box-shadow: 0 0 40px var(--crimson-bright), 0 0 60px var(--crimson-base);
     }
 }
 
-/* ========== CURSOR ANIMATIONS ========== */
-@keyframes cursorPulse {
+@keyframes textGlowPulse {
     0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
+        text-shadow: 0 0 20px var(--crimson-bright);
     }
     50% {
-        transform: translate(-50%, -50%) scale(1.2);
-        opacity: 0.8;
-    }
-}
-
-@keyframes cursorCrossSpin {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* ========== LOADING ANIMATIONS ========== */
-@keyframes loadingPulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 0.8;
-    }
-    50% {
-        transform: scale(1.1);
-        opacity: 1;
-    }
-}
-
-@keyframes loadingProgress {
-    from { width: 0%; }
-    to { width: 100%; }
-}
-
-/* ========== NAVIGATION ANIMATIONS ========== */
-@keyframes navLinkGlow {
-    0%, 100% {
-        text-shadow: none;
-    }
-    50% {
-        text-shadow: 0 0 10px var(--neon-red);
-    }
-}
-
-/* ========== FORM ANIMATIONS ========== */
-@keyframes formFocusGlow {
-    0%, 100% {
-        box-shadow: 0 0 0 rgba(255, 0, 0, 0);
-    }
-    50% {
-        box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+        text-shadow: 0 0 40px var(--crimson-bright), 0 0 60px var(--crimson-base);
     }
 }
 
@@ -389,33 +405,69 @@
     }
 }
 
+/* ========== SCREEN SHAKE ========== */
+@keyframes screenShake {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-4px, -2px); }
+    20% { transform: translate(4px, 2px); }
+    30% { transform: translate(-3px, 3px); }
+    40% { transform: translate(3px, -3px); }
+    50% { transform: translate(-2px, 2px); }
+    60% { transform: translate(2px, -1px); }
+    70% { transform: translate(-1px, 1px); }
+    80% { transform: translate(1px, 0); }
+    90% { transform: translate(0, -1px); }
+}
+
+/* ========== CHROMATIC ABERRATION ========== */
+@keyframes chromaticShift {
+    0%, 100% {
+        text-shadow:
+            -2px 0 var(--crimson-bright),
+            2px 0 var(--crimson-base);
+    }
+    50% {
+        text-shadow:
+            2px 0 var(--crimson-bright),
+            -2px 0 var(--crimson-base);
+    }
+}
+
 /* ========== COMBINED ANIMATION CLASSES ========== */
 .animate-fade-in {
-    animation: fadeInUp 0.8s ease forwards;
+    animation: fadeInUp 0.8s var(--ease-cosmic) forwards;
 }
 
 .animate-fade-in-scale {
-    animation: fadeInScale 0.6s ease forwards;
+    animation: fadeInScale 0.6s var(--ease-cosmic) forwards;
 }
 
 .animate-slide-left {
-    animation: slideInLeft 0.8s ease forwards;
+    animation: slideInLeft 0.8s var(--ease-cosmic) forwards;
 }
 
 .animate-slide-right {
-    animation: slideInRight 0.8s ease forwards;
+    animation: slideInRight 0.8s var(--ease-cosmic) forwards;
 }
 
 .animate-glow {
-    animation: glowPulse 2s ease-in-out infinite;
+    animation: glowPulse 2s var(--ease-cosmic) infinite;
 }
 
 .animate-float {
-    animation: float 6s ease-in-out infinite;
+    animation: float 6s var(--ease-cosmic) infinite;
 }
 
 .animate-float-slow {
-    animation: floatSlow 8s ease-in-out infinite;
+    animation: floatSlow 8s var(--ease-cosmic) infinite;
+}
+
+.animate-screen-shake {
+    animation: screenShake 0.4s var(--ease-cosmic);
+}
+
+.animate-chromatic {
+    animation: chromaticShift 0.1s var(--ease-cosmic) 3;
 }
 
 /* ========== STAGGERED ANIMATION DELAYS ========== */

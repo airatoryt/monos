@@ -1,0 +1,31 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: editorial_workflow
+
+media_folder: "assets/images/blog"
+public_folder: "/assets/images/blog"
+
+site_url: https://monos.netlify.app
+display_url: https://monos.netlify.app
+logo_url: /assets/images/sigil-static.svg
+
+collections:
+  - name: "posts"
+    label: "Transmissions"
+    folder: "blog/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} — {{date | date('YYYY-MM-DD')}}"
+    sortable_fields: ["date", "title"]
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Tag", name: "tag", widget: "select", options: ["COSMOLOGY", "PHILOSOPHY", "EXISTENCE", "ILLUSION", "IDENTITY", "VOID"]}
+      - {label: "Excerpt", name: "excerpt", widget: "text", required: false}
+      - {label: "Read Time (minutes)", name: "readTime", widget: "number", default: 5, required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
