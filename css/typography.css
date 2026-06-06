@@ -1,62 +1,32 @@
 /* MONOS - Typography System */
 /* 4-font architecture for hierarchy and meaning */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Major+Mono+Display&family=Orbitron:wght@400;500;600;700;800;900&family=Russo+One&display=swap');
 
 /* ========== FONT FACES ========== */
-/* Cinzel - Display (Arlecchino's aristocratic authority) */
-/* Cormorant Garamond - Accent (Philosophical, ethereal) */
-/* Inter - Body (Modern, readable) */
-/* JetBrains Mono - Technical (Scientific, precise) */
+/* Cinzel         - ORIGIN (mythic, foundational, Arlecchino authority) */
+/* Chakra Petch   - MULTIVERSE (cyberpunk, geometric, varied) */
+/* Russo One      - COLLAPSE (heavy, mechanical, dramatic) */
+/* Major Mono     - THE POINT (terminal, code-like, singular) */
+/* Orbitron       - BRAND (the MONOS wordmark itself) */
+/* Cormorant Garamond - Accent (philosophical, ethereal) */
+/* Inter          - Body (always readable) */
+/* JetBrains Mono - Technical / labels / numbers */
 
-/* ========== TYPE STYLES ========== */
+/* ========== BASE TYPE STYLES ========== */
+/* Note: per-section headings are defined in their section blocks below */
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
-    font-weight: 600;
-    line-height: var(--leading-tight);
-    letter-spacing: var(--tracking-wide);
-    color: var(--color-text);
-}
-
-h1 {
-    font-size: var(--text-5xl);
-    font-weight: 800;
-    letter-spacing: var(--tracking-widest);
-}
-
-h2 {
-    font-size: var(--text-4xl);
-    font-weight: 700;
-}
-
-h3 {
-    font-size: var(--text-3xl);
-    font-weight: 600;
-}
-
-h4 {
-    font-size: var(--text-2xl);
-    font-weight: 600;
-}
-
-h5 {
-    font-size: var(--text-xl);
-    font-weight: 500;
-}
-
-h6 {
-    font-size: var(--text-lg);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wider);
+p, body, input, button, textarea, select, li {
+    font-family: var(--font-body);
 }
 
 p {
-    font-family: var(--font-body);
-    font-size: var(--text-md);
+    font-size: clamp(0.95rem, 1.1vw, 1.125rem);
     line-height: var(--leading-relaxed);
     color: var(--color-text-muted);
+    max-width: 70ch;
+    font-weight: 300;
+    letter-spacing: 0.01em;
 }
 
 code, pre, .mono {
@@ -90,6 +60,217 @@ code, pre, .mono {
     font-weight: 400;
 }
 
+/* ========== MONOS WORDMARK (special) ========== */
+.title {
+    font-family: var(--font-brand);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 0.9;
+    font-feature-settings: "ss01", "cv01";
+}
+
+.title.docked {
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    font-size: clamp(1.4rem, 2.2vw, 2rem) !important;
+}
+
+/* ========== SECTION 1: ORIGIN ========== */
+.page-home h2,
+.page-home .section-title {
+    font-family: var(--font-origin);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--bone);
+    text-shadow: 0 0 30px var(--crimson-bright), 0 0 60px var(--crimson-rich);
+}
+
+.page-home .section-number {
+    font-family: var(--font-origin);
+    color: var(--crimson-bright);
+    letter-spacing: 0.2em;
+    font-weight: 700;
+}
+
+.page-home .section-line {
+    background: linear-gradient(90deg, transparent 0%, var(--crimson-bright) 50%, transparent 100%);
+    box-shadow: 0 0 15px var(--crimson-bright);
+}
+
+.page-home .subtitle {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+    color: var(--moonlight);
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+    max-width: 36ch;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+.page-home .tagline-text {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+    color: var(--crimson-glow);
+    text-shadow: 0 0 10px var(--crimson-bright);
+}
+
+/* ========== SECTION 2: MULTIVERSE ========== */
+.page-multiverse {
+    --font-display: var(--font-multiverse);
+    --color-text: #F4DCE7;
+}
+
+.page-multiverse h2,
+.page-multiverse .section-title {
+    font-family: var(--font-multiverse);
+    font-weight: 700;
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: #FFE0EC;
+    text-shadow:
+        0 0 25px var(--section-multiverse-accent),
+        0 0 50px rgba(255, 26, 107, 0.4);
+    font-style: italic;
+}
+
+.page-multiverse .section-number {
+    font-family: var(--font-multiverse);
+    color: var(--section-multiverse-accent);
+    letter-spacing: 0.3em;
+    font-weight: 600;
+    text-shadow: 0 0 15px var(--section-multiverse-accent);
+}
+
+.page-multiverse .section-line {
+    background: linear-gradient(90deg, transparent 0%, var(--section-multiverse-accent) 50%, transparent 100%);
+    box-shadow: 0 0 12px var(--section-multiverse-accent);
+}
+
+.page-multiverse p,
+.page-multiverse .reveal-text {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(244, 220, 231, 0.92);
+    letter-spacing: 0.01em;
+}
+
+/* ========== SECTION 3: COLLAPSE ========== */
+.page-collapse {
+    --font-display: var(--font-collapse);
+}
+
+.page-collapse h2,
+.page-collapse .section-title {
+    font-family: var(--font-collapse);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: var(--bone);
+    text-shadow:
+        0 0 30px var(--section-collapse-accent),
+        0 0 60px var(--crimson-bright),
+        0 0 90px var(--crimson-rich);
+    -webkit-text-stroke: 1px rgba(255, 51, 51, 0.4);
+}
+
+.page-collapse .section-number {
+    font-family: var(--font-collapse);
+    color: var(--crimson-bright);
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    text-shadow: 0 0 20px var(--crimson-bright);
+}
+
+.page-collapse .section-line {
+    background: linear-gradient(90deg, transparent 0%, var(--crimson-bright) 50%, transparent 100%);
+    height: 2px;
+    box-shadow: 0 0 15px var(--crimson-bright), 0 0 30px var(--crimson-rich);
+}
+
+.page-collapse p,
+.page-collapse .reveal-text {
+    font-family: var(--font-body);
+    font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+    font-weight: 400;
+    line-height: 1.7;
+    color: rgba(238, 240, 243, 0.95);
+    letter-spacing: 0.02em;
+}
+
+.page-collapse .collapse-quote {
+    font-family: var(--font-collapse);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--crimson-bright);
+    text-shadow: 0 0 20px var(--crimson-bright);
+}
+
+/* ========== SECTION 4: THE POINT ========== */
+.page-point {
+    --font-display: var(--font-point);
+}
+
+.page-point h2,
+.page-point .section-title {
+    font-family: var(--font-point);
+    font-weight: 400;
+    font-size: clamp(2rem, 4.5vw, 3.8rem);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    color: var(--crimson-bright);
+    text-shadow: 0 0 30px var(--crimson-bright), 0 0 60px var(--crimson-rich);
+}
+
+.page-point .section-number {
+    font-family: var(--font-point);
+    color: var(--crimson-bright);
+    letter-spacing: 0.15em;
+    font-weight: 400;
+    text-shadow: 0 0 15px var(--crimson-bright);
+}
+
+.page-point .section-line {
+    background: linear-gradient(90deg, transparent 0%, var(--crimson-bright) 50%, transparent 100%);
+    box-shadow: 0 0 12px var(--crimson-bright);
+}
+
+.page-point p,
+.page-point .reveal-text {
+    font-family: var(--font-mono);
+    font-size: clamp(0.95rem, 1.1vw, 1.15rem);
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--moonlight);
+    letter-spacing: 0.02em;
+    text-transform: none;
+    max-width: 65ch;
+}
+
+.page-point .point-mono {
+    font-family: var(--font-point);
+    color: var(--crimson-bright);
+    text-shadow: 0 0 15px var(--crimson-bright);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
 /* ========== UTILITY CLASSES ========== */
 .text-glow {
     text-shadow: var(--shadow-text-glow);
@@ -110,13 +291,4 @@ code, pre, .mono {
 .text-uppercase {
     text-transform: uppercase;
     letter-spacing: var(--tracking-wider);
-}
-
-/* ========== RESPONSIVE TYPE ========== */
-@media (max-width: 768px) {
-    :root {
-        --text-5xl: 4rem;
-        --text-4xl: 3rem;
-        --text-3xl: 2rem;
-    }
 }

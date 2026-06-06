@@ -94,7 +94,7 @@
         const { elements, state } = window.monosState;
         if (!elements.burstParticles) return;
 
-        const particleCount = state.isMobile ? 40 : 80;
+        const particleCount = 80;
         elements.burstParticles.innerHTML = '';
 
         for (let i = 0; i < particleCount; i++) {

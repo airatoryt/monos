@@ -169,22 +169,6 @@
     animation: diskSpin 2s linear infinite;
 }
 
-/* ========== MOBILE CURSOR ========== */
-@media (max-width: 768px) {
-    .cursor,
-    .cursor-trail {
-        display: none !important;
-    }
-    
-    body {
-        cursor: auto;
-    }
-    
-    a, button, input, textarea, [role="button"] {
-        cursor: pointer;
-    }
-}
-
 /* ========== PERFORMANCE ========== */
 @media (prefers-reduced-motion: reduce) {
     .cursor-cross {

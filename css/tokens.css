@@ -48,6 +48,27 @@
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-accent: 'Cormorant Garamond', 'Times New Roman', serif;
 
+    /* Per-section display fonts (each section has its own identity) */
+    --font-origin: 'Cinzel', 'Times New Roman', serif;
+    --font-multiverse: 'Chakra Petch', 'Arial', sans-serif;
+    --font-collapse: 'Russo One', 'Impact', sans-serif;
+    --font-point: 'Major Mono Display', 'Courier New', monospace;
+
+    /* Brand / wordmark */
+    --font-brand: 'Orbitron', 'Arial', sans-serif;
+
+    /* Section accent colors */
+    --section-origin-accent: #FF0000;
+    --section-multiverse-accent: #FF1A6B;
+    --section-collapse-accent: #FF3333;
+    --section-point-accent: #C81E1E;
+
+    /* Section bg hues (subtle tinting for differentiation) */
+    --section-origin-bg: #14151E;
+    --section-multiverse-bg: #16101E;
+    --section-collapse-bg: #080608;
+    --section-point-bg: #1A0A0E;
+
     /* Golden Ratio Type Scale (1.618) */
     --text-xs: 0.494rem;     /* ~8px */
     --text-sm: 0.618rem;     /* ~10px */

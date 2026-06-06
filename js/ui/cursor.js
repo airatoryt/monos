@@ -12,12 +12,6 @@
 
     class MonosCursor {
         constructor() {
-            this.isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
-            if (this.isMobile) {
-                this.hideCursor();
-                return;
-            }
-
             this.cursor = document.getElementById('cursor');
             this.cursorDot = document.querySelector('.cursor-dot');
             this.cursorRing = document.querySelector('.cursor-ring');

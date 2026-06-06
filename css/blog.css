@@ -375,19 +375,3 @@
     color: var(--void-0);
     box-shadow: 0 0 30px var(--crimson-bright);
 }
-
-/* ========== RESPONSIVE ========== */
-@media (max-width: 768px) {
-    .blog-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-4);
-    }
-
-    .post-container {
-        padding: calc(var(--size-nav-height) + var(--space-5)) var(--space-4) var(--space-8);
-    }
-
-    .post-body p:first-of-type::first-letter {
-        font-size: 3em;
-    }
-}

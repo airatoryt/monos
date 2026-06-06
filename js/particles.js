@@ -7,28 +7,28 @@
     // ========== PARTICLE CONFIGURATION ==========
     const PARTICLE_CONFIG = {
         starfield: {
-            count: window.innerWidth < 768 ? 800 : 2000,
+            count: 2000,
             size: { min: 0.5, max: 2 },
             speed: 0.0002,
             colors: [0xFFFFFF, 0xDDD3E3, 0xFF4444],
             opacity: { min: 0.3, max: 1 }
         },
         crimsonDust: {
-            count: window.innerWidth < 768 ? 100 : 300,
+            count: 300,
             size: { min: 1, max: 3 },
             speed: 0.0005,
             colors: [0xFF0000, 0x8B0000, 0x511720],
             opacity: { min: 0.4, max: 0.8 }
         },
         thornShards: {
-            count: window.innerWidth < 768 ? 20 : 50,
+            count: 50,
             size: { min: 2, max: 5 },
             speed: 0.0003,
             colors: [0xFF0000, 0xFF4444],
             opacity: { min: 0.6, max: 1 }
         },
         wingFragments: {
-            count: window.innerWidth < 768 ? 30 : 80,
+            count: 80,
             size: { min: 1, max: 4 },
             speed: 0.001,
             colors: [0xFF0000, 0x511720, 0xDDD3E3],

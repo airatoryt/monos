@@ -61,7 +61,7 @@
         const container = elements.thornsContainer;
         if (!container) return;
 
-        const count = state.isMobile ? 16 : 32;
+        const count = 32;
 
         for (let i = 0; i < count; i++) {
             const thorn = document.createElement('div');
@@ -79,7 +79,7 @@
         const container = elements.thornRing;
         if (!container) return;
 
-        const count = state.isMobile ? 12 : 24;
+        const count = 24;
 
         for (let i = 0; i < count; i++) {
             const thorn = document.createElement('div');

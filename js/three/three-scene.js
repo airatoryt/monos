@@ -120,8 +120,7 @@
         }
 
         createUniverseSpheres() {
-            const isMobile = window.innerWidth < 768;
-            const count = isMobile ? 7 : 12;
+            const count = 12;
             const radius = 200;
             const goldenRatio = (1 + Math.sqrt(5)) / 2;
             const angleIncrement = Math.PI * 2 * goldenRatio;
@@ -272,7 +271,7 @@
 
         createThornRing() {
             const thornGroup = new THREE.Group();
-            const thornCount = window.innerWidth < 768 ? 12 : 24;
+            const thornCount = 24;
             const ringRadius = 100;
 
             for (let i = 0; i < thornCount; i++) {

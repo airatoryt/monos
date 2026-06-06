@@ -10,7 +10,7 @@
             minDisplayTime: 1500
         },
         particles: {
-            count: window.innerWidth < 768 ? 500 : 1500
+            count: 1500
         },
         cursor: {
             trailEnabled: true,
@@ -36,7 +36,6 @@
         scrollProgress: 0,
         mouseX: 0,
         mouseY: 0,
-        isMobile: window.innerWidth < 768 || 'ontouchstart' in window,
         audioPlaying: false,
         audioMuted: false,
         cursorVisible: true,
