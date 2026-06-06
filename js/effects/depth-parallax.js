@@ -27,7 +27,6 @@
                 { sel: '.crimson-moon', depth: 18 },
                 { sel: '.hero-content', depth: 8 },
                 { sel: '.hero-sigil', depth: 24 },
-                { sel: '.title', depth: 14 },
                 { sel: '.subtitle', depth: 6 },
                 { sel: '.tagline', depth: 4 },
                 { sel: '.thorn-container', depth: 30 },

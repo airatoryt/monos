@@ -41,6 +41,10 @@
             this.scrollProgress = 0;
             this.targetScrollProgress = 0;
 
+            // Passage state
+            this.passageProgress = 0;
+            this.passageMode = 0; // 0=normal, 1=tear, 2=scaffold, 3=converge
+
             this.init();
         }
 
@@ -296,6 +300,8 @@
 
         updateUniverseSpheres(time) {
             const collapseFactor = this.scrollProgress;
+            const isScaffolding = this.passageMode === 2;
+            const isConverging = this.passageMode === 3;
 
             this.universeSpheres.forEach((sphere) => {
                 sphere.rotation.x += sphere.userData.rotationSpeed;
@@ -306,17 +312,38 @@
                 const radius = sphere.userData.orbitRadius;
                 const originalPos = sphere.userData.originalPosition;
 
-                const targetX = Math.cos(angle) * radius * (1 - collapseFactor * 0.9);
-                const targetY = Math.sin(angle) * radius * (1 - collapseFactor * 0.9);
-                const targetZ = originalPos.z + collapseFactor * 250;
+                // Scaffolding: particles reverse direction (outward flow)
+                // Converging: collapse into center
+                let expansionFactor = collapseFactor;
+                if (isScaffolding) {
+                    expansionFactor = 1 + (this.passageProgress - 0.45) / 0.20 * 0.4;
+                }
+                if (isConverging) {
+                    expansionFactor = 1 - (this.passageProgress - 0.65) / 0.20 * 0.95;
+                }
+
+                const targetX = Math.cos(angle) * radius * (1 - expansionFactor * 0.9);
+                const targetY = Math.sin(angle) * radius * (1 - expansionFactor * 0.9);
+                const targetZ = originalPos.z + expansionFactor * 250;
 
                 const lerpFactor = 0.05;
                 sphere.position.x += (targetX - sphere.position.x) * lerpFactor;
                 sphere.position.y += (targetY - sphere.position.y) * lerpFactor;
                 sphere.position.z += (targetZ - sphere.position.z) * lerpFactor;
 
-                const targetScale = 1 - collapseFactor * 0.4;
+                const targetScale = 1 - Math.abs(expansionFactor) * 0.4;
                 sphere.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.05);
+
+                // Scaffolding: dim, wireframe-y look
+                if (sphere.material) {
+                    if (isScaffolding) {
+                        sphere.material.opacity = 0.3;
+                    } else if (isConverging) {
+                        sphere.material.opacity = 0.6;
+                    } else {
+                        sphere.material.opacity = 0.7;
+                    }
+                }
             });
         }
 
@@ -326,32 +353,47 @@
             this.blackHole.material.uniforms.time.value = time;
             this.blackHole.rotation.y += SCENE_CONFIG.blackHole.rotationSpeed;
 
-            const glowIntensity = 1 + this.scrollProgress * 1.5;
+            // Glow intensifies with scroll, explodes during passage convergence
+            let glowIntensity = 1 + this.scrollProgress * 1.5;
+            if (this.passageMode === 3) {
+                glowIntensity *= 1 + (this.passageProgress - 0.65) / 0.20 * 0.8;
+            }
             this.blackHole.scale.set(glowIntensity, glowIntensity, glowIntensity);
 
             if (this.accretionDisk) {
                 this.accretionDisk.rotation.z += 0.002;
+                if (this.passageMode === 2) {
+                    this.accretionDisk.rotation.z += 0.008;
+                }
                 this.accretionDisk.children.forEach(ring => {
                     ring.material.uniforms.time.value = time;
+                    if (this.passageMode === 2) {
+                        ring.material.uniforms.time.value = time * 2.5;
+                    }
                 });
             }
 
             if (this.thornRing) {
                 this.thornRing.rotation.y -= 0.003;
                 this.thornRing.rotation.x = this.scrollProgress * Math.PI;
+
+                // During scaffolding, thorn ring becomes a "clockwork"
+                if (this.passageMode === 2) {
+                    this.thornRing.rotation.y -= 0.012;
+                    this.thornRing.rotation.z += 0.004;
+                }
+                if (this.passageMode === 3) {
+                    this.thornRing.rotation.x += 0.02;
+                }
             }
         }
 
         updateCamera() {
             this.scrollProgress += (this.targetScrollProgress - this.scrollProgress) * 0.05;
 
-            const targetZ = SCENE_CONFIG.camera.position.z - this.scrollProgress * 300;
-            this.camera.position.z += (targetZ - this.camera.position.z) * 0.05;
-
             const time = this.clock.getElapsedTime();
 
             // Mouse-driven depth parallax (igloo.inc signature)
-            // Map normalized mouse (-1..1) to camera offset, lerp smoothly
             const targetX = this.mouseX * 35 + Math.sin(time * 0.1) * 6;
             const targetY = this.mouseY * 25 + Math.cos(time * 0.15) * 4;
             const lookOffsetX = this.mouseX * -15;
@@ -360,7 +402,35 @@
             this.camera.position.x += (targetX - this.camera.position.x) * 0.04;
             this.camera.position.y += (targetY - this.camera.position.y) * 0.04;
 
+            // Camera Z follows scroll, but DIVES into the black hole during passage
+            let targetZ = SCENE_CONFIG.camera.position.z - this.scrollProgress * 300;
+            if (this.passageMode === 2) {
+                // Scaffolding: camera is at the black hole, slightly past
+                targetZ = -150;
+            }
+            if (this.passageMode === 3) {
+                // Converging: camera dives into the point
+                const diveProgress = (this.passageProgress - 0.65) / 0.20;
+                targetZ = -150 - diveProgress * 200;
+            }
+            if (this.passageMode === 0 && this.passageProgress > 0.85) {
+                // Emerge: camera retreats back to normal
+                const emergeProgress = (this.passageProgress - 0.85) / 0.15;
+                const normalZ = SCENE_CONFIG.camera.position.z - this.scrollProgress * 300;
+                targetZ = -150 + (normalZ - (-150)) * emergeProgress;
+            }
+
+            this.camera.position.z += (targetZ - this.camera.position.z) * 0.05;
+
             this.camera.lookAt(lookOffsetX, lookOffsetY, -100);
+
+            // FOV pulse during passage
+            if (this.passageMode === 2) {
+                this.camera.fov += (90 - this.camera.fov) * 0.05;
+            } else {
+                this.camera.fov += (60 - this.camera.fov) * 0.05;
+            }
+            this.camera.updateProjectionMatrix();
         }
 
         animate() {
@@ -415,6 +485,18 @@
 
         updateScrollProgress(progress) {
             this.targetScrollProgress = progress;
+        }
+
+        setPassage(progress) {
+            // progress 0..1 across the page
+            this.passageProgress = progress;
+
+            // Mode determination
+            if (progress < 0.25) this.passageMode = 0;
+            else if (progress < 0.45) this.passageMode = 1;
+            else if (progress < 0.65) this.passageMode = 2;
+            else if (progress < 0.85) this.passageMode = 3;
+            else this.passageMode = 0;
         }
 
         dispose() {

@@ -80,34 +80,21 @@
         const finalHTML = monosTitle.innerHTML;
         const finalText = monosTitle.dataset.scramble || monosTitle.dataset.text || monosTitle.textContent.trim();
 
-        const triggerReveal = () => {
-            monosTitle.innerHTML = '';
-            monosTitle.classList.add('glitching');
-            monosTitle.dataset.text = finalText;
+        // Trigger scramble immediately on page load (title is always visible)
+        monosTitle.innerHTML = '';
+        monosTitle.classList.add('glitching');
+        monosTitle.dataset.text = finalText;
 
-            setTimeout(() => {
-                scramble(monosTitle, finalText, {
-                    duration: 900,
-                    onComplete: () => {
-                        monosTitle.classList.remove('glitching');
-                        monosTitle.classList.add('revealed');
-                        monosTitle.innerHTML = finalHTML;
-                    }
-                });
-            }, 250);
-        };
-
-        if (window.monosState && window.monosState.state) {
-            const checkLoaded = setInterval(() => {
-                if (window.monosState.state.loaded) {
-                    clearInterval(checkLoaded);
-                    triggerReveal();
+        setTimeout(() => {
+            scramble(monosTitle, finalText, {
+                duration: 900,
+                onComplete: () => {
+                    monosTitle.classList.remove('glitching');
+                    monosTitle.classList.add('revealed');
+                    monosTitle.innerHTML = finalHTML;
                 }
-            }, 50);
-            setTimeout(() => clearInterval(checkLoaded), 6000);
-        } else {
-            setTimeout(triggerReveal, 3000);
-        }
+            });
+        }, 200);
 
         document.querySelectorAll('.nav-link, .morph-link').forEach(link => {
             const original = link.textContent;
