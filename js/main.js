@@ -13,6 +13,7 @@
         initContactForm();
         initBurstTriggers();
         initKeyboardNav();
+        initAudioPlayer();
     });
 
     // ========== NAVIGATION ==========
@@ -159,6 +160,31 @@
                 if (elements.audioBtn) {
                     elements.audioBtn.click();
                 }
+            }
+        });
+    }
+
+    // ========== AUDIO PLAYER ==========
+    function initAudioPlayer() {
+        const { elements, state } = window.monosState;
+        const audio = document.getElementById('ambientAudio');
+        if (!audio || !elements.audioBtn) return;
+
+        audio.volume = 0.4;
+
+        elements.audioBtn.addEventListener('click', () => {
+            if (state.audioPlaying) {
+                audio.pause();
+                elements.audioBtn.classList.add('muted');
+                state.audioPlaying = false;
+            } else {
+                audio.play().then(() => {
+                    elements.audioBtn.classList.remove('muted');
+                    state.audioPlaying = true;
+                }).catch(() => {
+                    elements.audioBtn.classList.add('muted');
+                    state.audioPlaying = false;
+                });
             }
         });
     }

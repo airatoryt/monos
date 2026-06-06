@@ -4,20 +4,26 @@
 (function() {
     'use strict';
 
+    const BASE = (() => {
+        const path = window.location.pathname;
+        const inSubpage = path.includes('/blog/') || path.includes('/admin/');
+        return inSubpage ? '../' : '';
+    })();
+
     let burstAudio = null;
     let whooshAudio = null;
     let rumbleAudio = null;
 
     function initBurstAudio() {
-        burstAudio = new Audio('assets/audio/burst.mp3');
+        burstAudio = new Audio(BASE + 'assets/audio/burst.mp3');
         burstAudio.volume = 0.4;
         burstAudio.preload = 'auto';
 
-        whooshAudio = new Audio('assets/audio/whoosh.mp3');
+        whooshAudio = new Audio(BASE + 'assets/audio/whoosh.mp3');
         whooshAudio.volume = 0.3;
         whooshAudio.preload = 'auto';
 
-        rumbleAudio = new Audio('assets/audio/rumble.mp3');
+        rumbleAudio = new Audio(BASE + 'assets/audio/rumble.mp3');
         rumbleAudio.volume = 0.3;
         rumbleAudio.preload = 'auto';
     }

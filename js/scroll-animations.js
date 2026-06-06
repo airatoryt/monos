@@ -189,20 +189,20 @@
                 trigger: '.page-collapse',
                 start: 'top 50%',
                 onEnter: () => {
-                    if (window.monosApp) {
-                        window.monosApp.triggerBurst();
+                    if (window.monosBurst) {
+                        window.monosBurst.triggerBurst();
                     }
                 },
                 once: true
             });
-            
+
             // Secondary burst trigger for the burst-trigger div
             ScrollTrigger.create({
                 trigger: '#burstTrigger',
                 start: 'top 70%',
                 onEnter: () => {
-                    if (window.monosApp) {
-                        window.monosApp.triggerBurst();
+                    if (window.monosBurst) {
+                        window.monosBurst.triggerBurst();
                     }
                 },
                 once: true
@@ -389,10 +389,11 @@
     }
     
     // ========== INITIALIZATION ==========
-    document.addEventListener('DOMContentLoaded', () => {
-        // Wait for page load
-        setTimeout(() => {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
             window.monosScrollAnimations = new ScrollAnimations();
-        }, 1000);
-    });
+        });
+    } else {
+        window.monosScrollAnimations = new ScrollAnimations();
+    }
 })();

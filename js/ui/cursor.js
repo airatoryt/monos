@@ -4,6 +4,12 @@
 (function() {
     'use strict';
 
+    const BASE = (() => {
+        const path = window.location.pathname;
+        const inSubpage = path.includes('/blog/') || path.includes('/admin/');
+        return inSubpage ? '../' : '';
+    })();
+
     class MonosCursor {
         constructor() {
             this.isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
@@ -30,8 +36,8 @@
             this.trailParticles = [];
             this.lastTrailTime = 0;
 
-            this.clickSound = new Audio('assets/audio/click.mp3');
-            this.hoverSound = new Audio('assets/audio/hover.mp3');
+            this.clickSound = new Audio(BASE + 'assets/audio/click.mp3');
+            this.hoverSound = new Audio(BASE + 'assets/audio/hover.mp3');
             this.clickSound.volume = 0.3;
             this.hoverSound.volume = 0.15;
             this.lastHoverTime = 0;
