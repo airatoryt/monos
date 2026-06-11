@@ -1,0 +1,5 @@
+node_modules
+.next
+.contentlayer
+*.tsbuildinfo
+next-env.d.ts

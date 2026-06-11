@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF0000" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#511720" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="spiral2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="50%" stop-color="#FF0000"/>
+      <stop offset="100%" stop-color="#511720"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer glow -->
+  <circle cx="100" cy="100" r="98" fill="url(#glow2)" opacity="0.5">
+    <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Rotating diamond frame -->
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="8s" repeatCount="indefinite"/>
+    <path d="M 100 15 L 180 100 L 100 185 L 20 100 Z" stroke="#FF0000" stroke-width="2" fill="none" opacity="0.7"/>
+    <path d="M 100 30 L 165 100 L 100 170 L 35 100 Z" stroke="#FF0000" stroke-width="1" fill="none" opacity="0.4"/>
+  </g>
+
+  <!-- Counter-rotating spiral -->
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="360 100 100" to="0 100 100" dur="12s" repeatCount="indefinite"/>
+    <path d="M 100 100
+             m 0 -8
+             a 8 8 0 1 1 0 16
+             a 16 16 0 1 1 0 -32
+             a 24 24 0 1 1 0 48
+             a 32 32 0 1 1 0 -64"
+          stroke="url(#spiral2)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Pulsing core -->
+  <circle cx="100" cy="100" r="4" fill="#FF0000">
+    <animate attributeName="r" values="3;6;3" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+</svg>
