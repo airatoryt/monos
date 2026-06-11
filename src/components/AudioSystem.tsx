@@ -4,14 +4,13 @@ import { useEffect, useRef, useState } from 'react';
 
 function getAudioBase() {
   if (typeof window === 'undefined') return '/assets/audio';
-  return window.location.pathname.startsWith('/archives')
-    ? '/assets/audio'
-    : '/assets/audio';
+  return '/assets/audio';
 }
 
 export function AudioSystem() {
-  const [playing, setPlaying] = useState(false);
-  const [blocked, setBlocked] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showPrompt, setShowPrompt] = useState(true);
+  const [isBlocked, setIsBlocked] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const promptRef = useRef<HTMLDivElement>(null);
 
@@ -26,20 +25,22 @@ export function AudioSystem() {
     const tryPlay = () => {
       if (!audioRef.current) return;
       audioRef.current.play().then(() => {
-        setPlaying(true);
-        setBlocked(false);
+        setIsPlaying(true);
+        setShowPrompt(false);
+        setIsBlocked(false);
       }).catch(() => {
-        setBlocked(true);
+        setIsBlocked(true);
       });
     };
 
     audio.addEventListener('canplaythrough', tryPlay, { once: true });
 
     const onInteraction = () => {
-      if (!audioRef.current || playing) return;
+      if (!audioRef.current || isPlaying) return;
       audioRef.current.play().then(() => {
-        setPlaying(true);
-        setBlocked(false);
+        setIsPlaying(true);
+        setShowPrompt(false);
+        setIsBlocked(false);
       }).catch(() => {});
     };
 
@@ -54,26 +55,27 @@ export function AudioSystem() {
         audioRef.current = null;
       }
     };
-  }, [playing]);
+  }, [isPlaying]);
 
   const toggle = () => {
     if (!audioRef.current) return;
-    if (playing) {
+    if (isPlaying) {
       audioRef.current.pause();
-      setPlaying(false);
+      setIsPlaying(false);
     } else {
       audioRef.current.play().then(() => {
-        setPlaying(true);
-        setBlocked(false);
+        setIsPlaying(true);
+        setShowPrompt(false);
+        setIsBlocked(false);
       }).catch(() => {});
     }
   };
 
   const dismissPrompt = () => {
-    setBlocked(false);
+    setIsBlocked(false);
     if (!audioRef.current) return;
     audioRef.current.play().then(() => {
-      setPlaying(true);
+      setIsPlaying(true);
     }).catch(() => {});
   };
 
@@ -104,7 +106,7 @@ export function AudioSystem() {
         tabIndex={0}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggle(); }}
       >
-        {playing ? (
+        {isPlaying ? (
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
             <rect x="5" y="4" width="4" height="16" rx="1" fill="var(--crimson-bright)" />
             <rect x="15" y="4" width="4" height="16" rx="1" fill="var(--crimson-bright)" />
@@ -118,7 +120,7 @@ export function AudioSystem() {
         )}
       </div>
 
-      {playing && (
+      {isPlaying && (
         <div
           style={{
             position: 'fixed',
@@ -148,7 +150,7 @@ export function AudioSystem() {
         </div>
       )}
 
-      {blocked && (
+      {showPrompt && (
         <div
           ref={promptRef}
           onClick={dismissPrompt}

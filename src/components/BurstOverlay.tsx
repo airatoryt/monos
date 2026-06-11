@@ -166,7 +166,7 @@ export function BurstOverlay() {
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,255,0.08)', transform: 'translateX(-3px)' }} />
       </div>
 
-      {/* Shockwave */}
+       {/* Shockwave */}
       <div
         ref={shockwaveRef}
         style={{
@@ -176,14 +176,14 @@ export function BurstOverlay() {
           width: 200,
           height: 200,
           borderRadius: '50%',
-          border: '2px solid var(--crimson-bright)',
           transform: 'translate(-50%, -50%) scale(0)',
           opacity: 1,
-          boxShadow: '0 0 60px var(--crimson-bright)',
+          background: 'radial-gradient(circle, rgba(255,0,50,0.8) 0%, rgba(255,100,150,0.4) 30%, rgba(255,200,250,0.2) 60%, transparent 100%)',
+          boxShadow: '0 0 80px rgba(255,0,50,0.9), 0 0 120px rgba(255,100,150,0.7), 0 0 160px rgba(255,200,250,0.5)',
         }}
       />
 
-      {/* Sigil */}
+       {/* Sigil */}
       <div
         ref={sigilRef}
         style={{
@@ -199,11 +199,11 @@ export function BurstOverlay() {
         <img
           src="/assets/images/sigil-static.svg"
           alt=""
-          style={{ width: '100%', height: '100%', filter: 'drop-shadow(0 0 30px var(--crimson-bright))' }}
+          style={{ width: '100%', height: '100%', filter: 'drop-shadow(0 0 40px rgba(255,0,50,0.9)), drop-shadow(0 0 60px rgba(255,100,150,0.7)), drop-shadow(0 0 80px rgba(255,200,250,0.5))' }}
         />
       </div>
 
-      {/* Wings */}
+       {/* Wings */}
       <div
         ref={wingLeftRef}
         style={{
@@ -214,16 +214,18 @@ export function BurstOverlay() {
           height: 120,
           transform: 'translate(-100%, -50%)',
           opacity: 0,
+          animation: 'wingPulse 2s ease-in-out infinite',
         }}
       >
         <div
           style={{
             width: '100%',
             height: '100%',
-            background: 'linear-gradient(90deg, transparent 0%, var(--crimson-bright) 50%, transparent 100%)',
+            background: 'linear-gradient(90deg, transparent 0%, rgba(255,0,50,0.9) 30%, rgba(255,100,150,0.7) 50%, rgba(255,200,250,0.4) 70%, transparent 100%)',
             clipPath: 'polygon(100% 50%, 0% 0%, 70% 50%, 0% 100%)',
-            opacity: 0.3,
-            filter: 'blur(2px)',
+            opacity: 0.5,
+            filter: 'blur(3px) brightness(1.5)',
+            boxShadow: '0 0 40px rgba(255,0,50,0.8), inset 0 0 20px rgba(255,100,150,0.5)',
           }}
         />
       </div>
@@ -237,21 +239,24 @@ export function BurstOverlay() {
           height: 120,
           transform: 'translate(0%, -50%)',
           opacity: 0,
+          animation: 'wingPulse 2s ease-in-out infinite',
+          animationDelay: '0.5s',
         }}
       >
         <div
           style={{
             width: '100%',
             height: '100%',
-            background: 'linear-gradient(90deg, transparent 0%, var(--crimson-bright) 50%, transparent 100%)',
+            background: 'linear-gradient(90deg, transparent 0%, rgba(255,100,150,0.7) 30%, rgba(255,0,50,0.9) 50%, rgba(255,200,250,0.5) 70%, transparent 100%)',
             clipPath: 'polygon(0% 50%, 100% 0%, 30% 50%, 100% 100%)',
-            opacity: 0.3,
-            filter: 'blur(2px)',
+            opacity: 0.5,
+            filter: 'blur(3px) brightness(1.5)',
+            boxShadow: '0 0 40px rgba(255,100,150,0.8), inset 0 0 20px rgba(255,0,50,0.5)',
           }}
         />
       </div>
 
-      {/* Particles */}
+       {/* Particles */}
       <div
         ref={particlesRef}
         style={{
@@ -267,15 +272,29 @@ export function BurstOverlay() {
             key={i}
             style={{
               position: 'absolute',
-              width: 3,
-              height: 3,
+              width: 3 + Math.random() * 4,
+              height: 3 + Math.random() * 4,
               borderRadius: '50%',
-              background: Math.random() > 0.5 ? 'var(--crimson-bright)' : 'var(--moonlight)',
-              boxShadow: `0 0 6px var(--crimson-bright)`,
+              background: `hsl(${Math.random() > 0.7 ? 340 + Math.random() * 40 : Math.random() * 60}, 100%, ${80 + Math.random() * 20}%)`,
+              boxShadow: `0 0 8px hsl(${Math.random() > 0.7 ? 340 + Math.random() * 40 : Math.random() * 60}, 100%, 60%), 0 0 16px rgba(255,255,255,0.8)`,
+              filter: Math.random() > 0.7 ? 'blur(0.5px)' : 'none',
             }}
           />
         ))}
       </div>
+      
+      <style jsx>{`
+        @keyframes wingPulse {
+          0%, 100% {
+            opacity: 0.3;
+            filter: blur(3px) brightness(1.5);
+          }
+          50% {
+            opacity: 0.7;
+            filter: blur(2px) brightness(2);
+          }
+        }
+      `}</style>
     </div>
   );
 }
